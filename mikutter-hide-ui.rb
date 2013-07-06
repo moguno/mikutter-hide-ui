@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 
 Plugin.create :test do
   on_window_created do |i_window|
