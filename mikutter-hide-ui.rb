@@ -95,6 +95,16 @@ Plugin.create :test do
           postbox.hide_all
         end
       }
+
+      result = get_all_widgets(window, ::Gtk::Statusbar)
+
+      result.each { |statusbar|
+        if show
+          statusbar.show_all
+        else
+          statusbar.hide_all
+        end
+      }
     rescue => e
       puts e
       puts e.backtrace
