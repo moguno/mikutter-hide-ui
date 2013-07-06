@@ -71,8 +71,8 @@ Plugin.create :test do
 
   def mouse_in_window?(window)
     size = window.window.size
-#    pos = window.screen.root_window.pointer
-    pos = ::Gdk::Display.default.pointer
+    pos = window.window.pointer
+#    pos = ::Gdk::Display.default.pointer
 
     (((pos[1] >= 0) && (pos[1] <= size[0])) && ((pos[2] >= 0) && (pos[2] <= size[1])))
   end
