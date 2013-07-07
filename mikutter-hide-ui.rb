@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
 
 Plugin.create :test do
+
+  on_boot do |service|
+    UserConfig[:hide_ui_postbox] ||= true
+    UserConfig[:hide_ui_tab] ||= true
+    UserConfig[:hide_ui_statusbar] ||= true
+  end
+
+
   on_window_created do |i_window|
     begin
       # メインウインドウを取得
@@ -69,6 +77,12 @@ Plugin.create :test do
   end
 
 
+  settings "隠す" do
+    boolean("ポストボックスを隠す", :hide_ui_postbox)
+    boolean("タブを隠す", :hide_ui_tab)
+    boolean("ステータスバーを隠す", :hide_ui_statusbar)
+  end
+
   def mouse_in_window?(window)
     size = window.window.size
     pos = window.window.pointer
@@ -83,13 +97,13 @@ Plugin.create :test do
       result = get_all_widgets(window, ::Gtk::Notebook)
 
       result.each { |notebook|
-        notebook.show_tabs = show
+        notebook.show_tabs = (show || !UserConfig[:hide_ui_tab])
       }
 
       result = get_all_widgets(window, ::Gtk::PostBox)
 
       result.each { |postbox|
-        if show
+        if show || !UserConfig[:hide_ui_postbox]
           postbox.show_all
         else
           postbox.hide_all
@@ -99,7 +113,7 @@ Plugin.create :test do
       result = get_all_widgets(window, ::Gtk::Statusbar)
 
       result.each { |statusbar|
-        if show
+        if show || !UserConfig[:hide_ui_statusbar]
           statusbar.show_all
         else
           statusbar.hide_all
