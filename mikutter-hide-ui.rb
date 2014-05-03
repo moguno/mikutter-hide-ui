@@ -102,6 +102,8 @@ Plugin.create :test do
 
       result = get_all_widgets(window, ::Gtk::PostBox)
 
+      postbox_available = result.length != 0
+
       result.each { |postbox|
         if show || !UserConfig[:hide_ui_postbox]
           postbox.show_all
@@ -109,6 +111,18 @@ Plugin.create :test do
           postbox.hide_all
         end
       }
+
+      if defined?(::Gtk::AccountBox) && postbox_available
+        result = get_all_widgets(window, ::Gtk::AccountBox)
+
+        result.each { |accountbox|
+          if show || !UserConfig[:hide_ui_postbox]
+            accountbox.show_all
+          else
+            accountbox.hide_all
+          end
+        }
+      end
 
       result = get_all_widgets(window, ::Gtk::Statusbar)
 
