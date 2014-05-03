@@ -5,7 +5,7 @@ depends:
   plugin:
   - settings
   - gui
-version: '3.0.0'
+version: 3.0.0
 author: moguno
 name: mikutter-hide-ui
-description: "非アクティブ時に使わな隠して画面を有効活用します。"
+description: "非アクティブ時に使わない部品（ポストボックス、ステータスバー）を隠して画面を有効活用します。"
