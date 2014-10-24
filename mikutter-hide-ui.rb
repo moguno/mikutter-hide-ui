@@ -3,9 +3,9 @@
 Plugin.create :test do
 
   on_boot do |service|
-    UserConfig[:hide_ui_postbox] ||= true
-    UserConfig[:hide_ui_tab] ||= true
-    UserConfig[:hide_ui_statusbar] ||= true
+    UserConfig[:hide_ui_postbox]   = true if UserConfig[:hide_ui_postbox].nil?
+    UserConfig[:hide_ui_tab]       = true if UserConfig[:hide_ui_tab].nil?
+    UserConfig[:hide_ui_statusbar] = true if UserConfig[:hide_ui_statusbar].nil?
   end
 
 
